@@ -8,10 +8,12 @@ Sequences can be prioritized by utility functions.
 Features:
 - HTN/utility ai hybrid: priorize tasks and select inputs by utility functions
 - One included dependency: [xNode](https://github.com/Siccity/xNode)
+- Very fast
 
 Missing:
 - Example project
 - Interruptions like getting attacked
+- Partial plans: stop planning when the estimated execution time of the plan reaches some threshold
 
 ## Based upon
 Introduction: https://www.youtube.com/watch?v=kXm467TFTcY
