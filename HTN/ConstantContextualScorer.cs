@@ -1,5 +1,5 @@
 ﻿namespace SandboxAI.HTN {
-    [CreateNodeMenu("CtxScorers/Constant")]
+    [CreateNodeMenu("Constant")]
     public class ConstantContextualScorer : ContextualScorerBase {
         public float constantScore;
         

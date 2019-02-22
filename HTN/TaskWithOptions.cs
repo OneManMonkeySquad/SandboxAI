@@ -3,6 +3,7 @@ using UnityEngine;
 using XNode;
 
 namespace SandboxAI.HTN {
+    [CreateNodeMenu("")]
     public class TaskWithOptions<StateT, OptionT> : Task<StateT> {
         [Input(ShowBackingValue.Never)] public OptionScorerBase[] optionScorers;
 
@@ -28,7 +29,7 @@ namespace SandboxAI.HTN {
         }
 
         public override object GetValue(NodePort port) {
-            optionScorers = GetInputValues<OptionScorer<OptionT>>("optionScorers");
+            optionScorers = GetInputValues<OptionScorerBase>("optionScorers");
             return base.GetValue(port);
         }
     }

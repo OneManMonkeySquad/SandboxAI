@@ -11,26 +11,26 @@ namespace SandboxAI.HTN {
         PlanFailed
     }
 
-    public class AI<StateT> where StateT : IState {
+    public class AI {
         struct PlannerState {
             public Stack<TaskBase> tasksToProcess;
             public List<TaskBase> finalPlan;
-            public StateT workingWS;
+            public IState workingWS;
             public int nextMethodIdx;
-            public CompoundTaskBase nextMethodPtr;
+            public CompoundTask nextMethodPtr;
         }
 
         Stack<TaskBase> _currentPlan;
         TaskBase _currentTask;
         float _minNextPlanTime;
 
-        public void Update(StateT state, TaskBase rootTask) {
+        public void Update(IState state, TaskBase rootTask) {
             if (_currentPlan == null) {
                 if (Time.time >= _minNextPlanTime) {
                     _minNextPlanTime = Time.time + 1;
 
                     if (Plan(state, rootTask, out _currentPlan)) {
-                        Debug.Log("Plan: " + _currentPlan.Aggregate("", (acc, task) => acc + task + ","));
+                        Debug.Log("Plan: " + _currentPlan.Aggregate("", (acc, task) => acc + task.name + ","));
 
                         CompleteCurrentTask(state);
                     }
@@ -41,7 +41,7 @@ namespace SandboxAI.HTN {
             }
         }
 
-        public void AbortCurrentTask(StateT state) {
+        public void AbortCurrentTask(IState state) {
             if (_currentTask != null) {
                 _currentTask.Terminate(state, false);
             }
@@ -49,7 +49,7 @@ namespace SandboxAI.HTN {
             _currentTask = null;
         }
 
-        public CompleteCurrentTaskResult CompleteCurrentTask(StateT state) {
+        public CompleteCurrentTaskResult CompleteCurrentTask(IState state) {
             if (_currentTask != null) {
                 if (!_currentTask.Terminate(state, true)) {
                     _currentPlan = null;
@@ -87,13 +87,13 @@ namespace SandboxAI.HTN {
             return CompleteCurrentTaskResult.ContinuePlan;
         }
         
-        bool Plan(StateT state, TaskBase rootTask, out Stack<TaskBase> finalPlan) {
+        bool Plan(IState state, TaskBase rootTask, out Stack<TaskBase> finalPlan) {
             Assert.IsNotNull(rootTask);
 
             var plannerState = new PlannerState() {
                 tasksToProcess = new Stack<TaskBase>(),
                 finalPlan = new List<TaskBase>(),
-                workingWS = (StateT)state.Clone()
+                workingWS = state.Clone()
             };
             plannerState.tasksToProcess.Push(rootTask);
             plannerState.nextMethodIdx = 0;
@@ -101,8 +101,8 @@ namespace SandboxAI.HTN {
             var decompHistory = new Stack<PlannerState>();
             while (plannerState.tasksToProcess.Count > 0) {
                 var currentTask = plannerState.tasksToProcess.Pop();
-                if (currentTask is CompoundTaskBase CurrentTaskCompound) {
-                    Debug.Log(Padd(decompHistory) + "CT " + currentTask);
+                if (currentTask is CompoundTask CurrentTaskCompound) {
+                    Debug.Log(Padd(decompHistory) + "CT " + currentTask.name);
 
                     if (plannerState.nextMethodPtr != CurrentTaskCompound) {
                         plannerState.nextMethodPtr = CurrentTaskCompound;
@@ -119,11 +119,11 @@ namespace SandboxAI.HTN {
                         }
                     }
                     else {
-                        RestoreToLastDecomposedTask(ref plannerState, decompHistory, CurrentTaskCompound + " no satisfied method");
+                        RestoreToLastDecomposedTask(ref plannerState, decompHistory, CurrentTaskCompound.name + " no satisfied method");
                     }
                 }
                 else { //Primitive Task
-                    Debug.Log(Padd(decompHistory) + "PT " + currentTask);
+                    Debug.Log(Padd(decompHistory) + "PT " + currentTask.name);
 
                     if (currentTask.Check(plannerState.workingWS)) {
                         currentTask.Apply(plannerState.workingWS);
@@ -141,12 +141,15 @@ namespace SandboxAI.HTN {
             return true;
         }
 
-        Method FindSatisfiedMethod(CompoundTaskBase CurrentTaskCompound, StateT state, ref int nextMethodIdx) {
-            var methodState = (StateT)state.Clone();
+        Method FindSatisfiedMethod(CompoundTask CurrentTaskCompound, IState state, ref int nextMethodIdx) {
+            var methodState = state.Clone();
             
             var methods = CurrentTaskCompound.methods.OrderByDescending(m => m.Score(state)).ToList();
             for (; nextMethodIdx < methods.Count; ++nextMethodIdx) {
                 var method = methods[nextMethodIdx];
+
+                if (!method.Check(methodState))
+                    continue;
 
                 var methodValid = true;
                 foreach (var task in method.tasks) {
@@ -169,11 +172,11 @@ namespace SandboxAI.HTN {
             return null;
         }
 
-        void RecordDecompositionOfTask(PlannerState plannerState, CompoundTaskBase CurrentTaskCompound, Stack<PlannerState> DecompHistory) {
+        void RecordDecompositionOfTask(PlannerState plannerState, CompoundTask CurrentTaskCompound, Stack<PlannerState> DecompHistory) {
             var copy = new PlannerState {
                 finalPlan = new List<TaskBase>(plannerState.finalPlan),
                 tasksToProcess = new Stack<TaskBase>(plannerState.tasksToProcess),
-                workingWS = (StateT)plannerState.workingWS.Clone(),
+                workingWS = plannerState.workingWS.Clone(),
                 nextMethodIdx = plannerState.nextMethodIdx,
                 nextMethodPtr = plannerState.nextMethodPtr
             };
