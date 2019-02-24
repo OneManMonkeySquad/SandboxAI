@@ -1,10 +1,11 @@
 # SandboxAI
-HTN ai implementation for [Unity3d](https://unity3d.com).
+HTN AI implementation for [Unity3d](https://unity3d.com). It's perfect for a Skyrim-like sandbox AI. It doesn't follow any existing implementation. Instead it's
+my own interpretation of the concept. 
 
 ![Example Graph](Docs/ExampleGraph.jpg)
 
 Features:
-- HTN/utility ai hybrid: priorize tasks and select inputs by utility functions
+- HTN/utility AI hybrid: priorize tasks and select inputs by utility functions
 - One included dependency: [xNode](https://github.com/Siccity/xNode)
 
 Missing:
@@ -24,6 +25,3 @@ Introduction: https://www.youtube.com/watch?v=kXm467TFTcY
 ### Prerequisites
 - Recent Unity version (2018)
 - [xNode](https://github.com/Siccity/xNode)
-
-## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

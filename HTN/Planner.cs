@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 namespace SandboxAI.HTN {
     static class Planner {
-        struct PlannerState {
+        struct State {
             public Stack<TaskBase> tasksToProcess;
             public List<TaskBase> finalPlan;
             public IState workingWS;
@@ -17,7 +17,7 @@ namespace SandboxAI.HTN {
             Assert.IsNotNull(currentState);
             Assert.IsNotNull(rootTask);
 
-            var plannerState = new PlannerState() {
+            var plannerState = new State() {
                 tasksToProcess = new Stack<TaskBase>(),
                 finalPlan = new List<TaskBase>(),
                 workingWS = currentState.Clone()
@@ -25,7 +25,7 @@ namespace SandboxAI.HTN {
             plannerState.tasksToProcess.Push(rootTask);
             plannerState.nextMethodIdx = 0;
 
-            var decompHistory = new Stack<PlannerState>();
+            var decompHistory = new Stack<State>();
             while (plannerState.tasksToProcess.Count > 0) {
                 var currentTask = plannerState.tasksToProcess.Pop();
                 if (currentTask is CompoundTask CurrentTaskCompound) {
@@ -104,8 +104,8 @@ namespace SandboxAI.HTN {
             return null;
         }
 
-        static void RecordDecompositionOfTask(PlannerState plannerState, CompoundTask CurrentTaskCompound, Stack<PlannerState> DecompHistory) {
-            var copy = new PlannerState {
+        static void RecordDecompositionOfTask(State plannerState, CompoundTask CurrentTaskCompound, Stack<State> DecompHistory) {
+            var copy = new State {
                 finalPlan = new List<TaskBase>(plannerState.finalPlan),
                 tasksToProcess = new Stack<TaskBase>(plannerState.tasksToProcess),
                 workingWS = plannerState.workingWS.Clone(),
@@ -116,7 +116,7 @@ namespace SandboxAI.HTN {
             DecompHistory.Push(copy);
         }
 
-        static void RestoreToLastDecomposedTask(ref PlannerState plannerState, Stack<PlannerState> DecompHistory, string reason) {
+        static void RestoreToLastDecomposedTask(ref State plannerState, Stack<State> DecompHistory, string reason) {
             //Debug.Log(Padd(DecompHistory) + "[RestoreToLastDecomposedTask:" + reason + "]");
 
             if (DecompHistory.Count == 0) {
@@ -127,7 +127,7 @@ namespace SandboxAI.HTN {
             plannerState = DecompHistory.Pop();
         }
 
-        static string Padd(Stack<PlannerState> DecompHistory) {
+        static string Padd(Stack<State> DecompHistory) {
             return "".PadRight(DecompHistory.Count * 4);
         }
     }
