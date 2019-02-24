@@ -27,7 +27,7 @@ namespace SandboxAI.HTN {
         public void Update(IState state, TaskBase rootTask) {
             if (_currentPlan == null) {
                 if (Time.time >= _minNextPlanTime) {
-                    _minNextPlanTime = Time.time + 1;
+                    _minNextPlanTime = Time.time + 0.25f;
 
                     if (Plan(state, rootTask, out _currentPlan)) {
                         Debug.Log("Plan: " + _currentPlan.Aggregate("", (acc, task) => acc + task.name + ","));

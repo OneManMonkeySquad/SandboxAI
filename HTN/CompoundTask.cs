@@ -2,7 +2,7 @@
 using XNode;
 
 namespace SandboxAI.HTN {
-    [NodeTint(225, 255, 150)]
+    [NodeTint(200, 255, 150)]
     public class CompoundTask : TaskBase {
         [Input(ShowBackingValue.Never)] public Method[] methods;
 

@@ -1,11 +1,9 @@
-﻿using UnityEngine;
-
-namespace SandboxAI {
+﻿namespace SandboxAI {
     public class MoveToOperand : IAgentOperand {
-        Transform _target;
+        MoveToTransformOrPosition _target;
         float _targetDistance;
 
-        public MoveToOperand(Transform target, float targetDistance) {
+        public MoveToOperand(MoveToTransformOrPosition target, float targetDistance = 0) {
             _target = target;
             _targetDistance = targetDistance;
         }

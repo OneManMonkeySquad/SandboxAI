@@ -2,6 +2,7 @@
 
 namespace SandboxAI.HTN {
     [CreateNodeMenu("")]
+    [NodeTint(255, 255, 160)]
     public abstract class CheckBase : Node {
         [Output] public CheckBase check;
         public bool invert;

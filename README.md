@@ -1,19 +1,20 @@
 # SandboxAI
-Bare-bones HTN ai implementation for [Unity3d](https://unity3d.com).
-Implements a Hierarchical Task Network planner which creates plans from designer given sequences of tasks with preconditions and effects.
-Sequences can be prioritized by utility functions.
+HTN ai implementation for [Unity3d](https://unity3d.com).
 
 ![Example Graph](Docs/ExampleGraph.jpg)
 
 Features:
 - HTN/utility ai hybrid: priorize tasks and select inputs by utility functions
 - One included dependency: [xNode](https://github.com/Siccity/xNode)
-- Very fast
 
 Missing:
+- Debugger
 - Example project
 - Interruptions like getting attacked
 - Partial plans: stop planning when the estimated execution time of the plan reaches some threshold
+
+## Getting started
+Use git to checkout the project or [unzip a release](https://github.com/SirPolly/SandboxAI/releases) into your Unit project Assets folder. Open the *Example/Example.scene*.
 
 ## Based upon
 Introduction: https://www.youtube.com/watch?v=kXm467TFTcY

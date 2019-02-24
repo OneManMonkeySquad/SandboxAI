@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace SandboxAI {
+    [AddComponentMenu("AI/Sandbox/Agent")]
     public class Agent : MonoBehaviour {
         public IAgentNavigation navigation {
             get { return GetComponent<IAgentNavigation>(); }
@@ -54,6 +55,7 @@ namespace SandboxAI {
 
             var result = _currentOp.Update(this);
             if (result == AgentOperandUpdateResult.Failed) {
+                Debug.Log("OP failed " + _currentOp);
                 _currentOp = null;
                 ops.Clear();
                 return AgentOperandUpdateResult.Failed;

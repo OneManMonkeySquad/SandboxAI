@@ -2,6 +2,7 @@
 using UnityEngine.AI;
 
 namespace SandboxAI {
+    [AddComponentMenu("AI/Sandbox/Navigation/NavMesh")]
     [RequireComponent(typeof(NavMeshAgent))]
     public class NavMeshAgentNavigation : MonoBehaviour, IAgentNavigation {
         public Vector3 velocity {
@@ -17,16 +18,16 @@ namespace SandboxAI {
         }
 
         NavMeshAgent _agent;
-        Transform _target;
+        MoveToTransformOrPosition _target;
 
-        public void MoveTo(Transform target, float distance = 0) {
+        public void MoveTo(MoveToTransformOrPosition target, float distance = 0) {
             _agent.enabled = true;
 
             if (!_agent.isOnNavMesh)
                 return;
 
             _agent.stoppingDistance = distance;
-            _agent.destination = target.transform.position;
+            _agent.destination = target.GetPosition();
             _agent.isStopped = false;
 
             _target = target;
@@ -51,9 +52,9 @@ namespace SandboxAI {
             if (!_agent.enabled || _target == null)
                 return;
 
-            var diff = _agent.destination - _target.position;
+            var diff = _agent.destination - _target.GetPosition();
             if (diff.sqrMagnitude > 1) {
-                _agent.destination = _target.position;
+                _agent.destination = _target.GetPosition();
             }
         }
     }

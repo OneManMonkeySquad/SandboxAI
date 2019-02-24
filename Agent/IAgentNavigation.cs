@@ -14,7 +14,7 @@ namespace SandboxAI {
             get;
         }
 
-        void MoveTo(Transform target, float distance = 0);
+        void MoveTo(MoveToTransformOrPosition target, float distance = 0);
         void StopMoving();
         void Disable();
     }
