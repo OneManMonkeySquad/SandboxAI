@@ -3,6 +3,7 @@ HTN AI implementation for [Unity3d](https://unity3d.com). It's perfect for a Sky
 my own interpretation of the concept. 
 
 ![Example Graph](Docs/ExampleGraph.jpg)
+![Example Scorer](Docs/ExampleScorer.jpg)
 
 Features:
 - HTN/utility AI hybrid: priorize tasks and select inputs by utility functions
