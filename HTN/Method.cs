@@ -1,4 +1,5 @@
-﻿using XNode;
+﻿using System.Linq;
+using XNode;
 
 namespace SandboxAI.HTN {
     [CreateNodeMenu("Method")]
@@ -18,7 +19,7 @@ namespace SandboxAI.HTN {
 
         public override object GetValue(NodePort port) {
             method = this;
-            tasks = GetInputValues<TaskBase>("tasks");
+            tasks = GetInputValues<TaskBase>("tasks").OrderBy(t => t.position.y).ToArray();
             ctxScorers = GetInputValues<ContextualScorerBase>("ctxScorers");
             checks = GetInputValues<CheckBase>("checks");
             return this;
