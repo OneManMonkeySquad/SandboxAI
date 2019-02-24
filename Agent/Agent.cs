@@ -13,7 +13,7 @@ namespace SandboxAI {
             get { return GetComponentInChildren<Animator>(); }
         }
 
-        public HTNGraph graph;
+        public Graph graph;
 
         AI ai;
         Queue<IAgentOperand> ops = new Queue<IAgentOperand>();
@@ -29,7 +29,7 @@ namespace SandboxAI {
 
         public void UpdateAgent(IState state) {
             ai.Update(state, graph.mainTask);
-
+            
             switch (UpdateOperands()) {
                 case AgentOperandUpdateResult.Pending:
                     break;

@@ -87,7 +87,7 @@ namespace SandboxAI.HTN {
             return CompleteCurrentTaskResult.ContinuePlan;
         }
         
-        bool Plan(IState state, TaskBase rootTask, out Stack<TaskBase> finalPlan) {
+        static bool Plan(IState state, TaskBase rootTask, out Stack<TaskBase> finalPlan) {
             Assert.IsNotNull(rootTask);
 
             var plannerState = new PlannerState() {
@@ -141,7 +141,7 @@ namespace SandboxAI.HTN {
             return true;
         }
 
-        Method FindSatisfiedMethod(CompoundTask CurrentTaskCompound, IState state, ref int nextMethodIdx) {
+        static Method FindSatisfiedMethod(CompoundTask CurrentTaskCompound, IState state, ref int nextMethodIdx) {
             var methodState = state.Clone();
             
             var methods = CurrentTaskCompound.methods.OrderByDescending(m => m.Score(state)).ToList();
@@ -172,7 +172,7 @@ namespace SandboxAI.HTN {
             return null;
         }
 
-        void RecordDecompositionOfTask(PlannerState plannerState, CompoundTask CurrentTaskCompound, Stack<PlannerState> DecompHistory) {
+        static void RecordDecompositionOfTask(PlannerState plannerState, CompoundTask CurrentTaskCompound, Stack<PlannerState> DecompHistory) {
             var copy = new PlannerState {
                 finalPlan = new List<TaskBase>(plannerState.finalPlan),
                 tasksToProcess = new Stack<TaskBase>(plannerState.tasksToProcess),
@@ -184,7 +184,7 @@ namespace SandboxAI.HTN {
             DecompHistory.Push(copy);
         }
 
-        void RestoreToLastDecomposedTask(ref PlannerState plannerState, Stack<PlannerState> DecompHistory, string reason) {
+        static void RestoreToLastDecomposedTask(ref PlannerState plannerState, Stack<PlannerState> DecompHistory, string reason) {
             //Debug.Log(Padd(DecompHistory) + "[RestoreToLastDecomposedTask:" + reason + "]");
 
             if (DecompHistory.Count == 0) {
