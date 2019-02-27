@@ -26,3 +26,6 @@ Introduction: https://www.youtube.com/watch?v=kXm467TFTcY
 ### Prerequisites
 - Recent Unity version (2018)
 - [xNode](https://github.com/Siccity/xNode)
+
+## License
+This project is licensed under the MIT License. You cannot sell this software on the Unity Asset Store or any other platform that sells software tools for developers. You may use this software in a commercial game.
