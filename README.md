@@ -9,7 +9,7 @@ my own interpretation of the concept.
 Features:
 - HTN/utility AI hybrid: priorize tasks and select inputs by utility functions
 - One included dependency: [xNode](https://github.com/Siccity/xNode)
-- Minimal api surface to learn while still having the possibily of creating a powerful game AI
+- Minimal api surface to learn while still having the possibility of creating a powerful game AI
 
 Missing:
 - Debugger
