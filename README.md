@@ -47,7 +47,7 @@ public class Robot : HTNAgent {
 
 Look at the sample to learn how to create ContextualScorers, OptionScorers and Tasks. The *Robot_HTNGraph* contains the actual decision making.
 
-Now, create your own logic classes and create your own HTNGraph by clicking right in the project explorer, then clicking Create/SandboxAI/HTNGraph.
+Now, create your own logic classes and create your own HTNGraph by right-clicking in the project explorer, then clicking Create/SandboxAI/HTNGraph.
 
 ## Based upon
 Introduction: https://www.youtube.com/watch?v=kXm467TFTcY
