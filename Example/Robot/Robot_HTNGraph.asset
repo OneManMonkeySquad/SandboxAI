@@ -1,0 +1,592 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9756cd9545541234c92a47d9ac93f947, type: 3}
+  m_Name: Robot_HTNGraph
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 114480900038190310}
+  - {fileID: 114241655694559000}
+  - {fileID: 114747727186625078}
+  - {fileID: 114785192205936990}
+  - {fileID: 114962910425760748}
+  - {fileID: 114829231536106088}
+  - {fileID: 114532254774610054}
+  - {fileID: 114224976253284616}
+  - {fileID: 114073623971154874}
+  - {fileID: 114905176581802980}
+  - {fileID: 114032767634774108}
+  - {fileID: 114813624013133474}
+  - {fileID: 114707511626103866}
+  - {fileID: 114250557546955276}
+--- !u!114 &114032767634774108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3aec60c748c2ef41b64dd1e7b19b81e, type: 3}
+  m_Name: Shoot At Target
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1160, y: 520}
+  ports:
+    keys:
+    - task
+    values:
+    - _fieldName: task
+      _node: {fileID: 114032767634774108}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: tasks
+        node: {fileID: 114073623971154874}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  task: {fileID: 114032767634774108}
+  shotPrefab: {fileID: 7555318698643462898, guid: 6cb6a6da1b98ebe4197e58868d4c02f8,
+    type: 3}
+--- !u!114 &114073623971154874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5467f058b4c44f84ea3d53115de86, type: 3}
+  m_Name: Shoot Robot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -776, y: 456}
+  ports:
+    keys:
+    - method
+    - tasks
+    - ctxScorers
+    - checks
+    values:
+    - _fieldName: method
+      _node: {fileID: 114073623971154874}
+      _typeQualifiedName: SandboxAI.HTN.Method, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: methods
+        node: {fileID: 114747727186625078}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: tasks
+      _node: {fileID: 114073623971154874}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase[], SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: task
+        node: {fileID: 114905176581802980}
+        reroutePoints: []
+      - fieldName: task
+        node: {fileID: 114032767634774108}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: ctxScorers
+      _node: {fileID: 114073623971154874}
+      _typeQualifiedName: SandboxAI.HTN.ContextualScorerBase[], SandboxAI, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: ctxScorer
+        node: {fileID: 114707511626103866}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: checks
+      _node: {fileID: 114073623971154874}
+      _typeQualifiedName: SandboxAI.HTN.CheckBase[], SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+  method: {fileID: 114073623971154874}
+  tasks:
+  - {fileID: 114905176581802980}
+  - {fileID: 114032767634774108}
+  ctxScorers:
+  - {fileID: 114707511626103866}
+  checks: []
+--- !u!114 &114224976253284616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848356742b1761e42a18353db0d98661, type: 3}
+  m_Name: Closest Game Object
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1544, y: -248}
+  ports:
+    keys:
+    - optionScorer
+    values:
+    - _fieldName: optionScorer
+      _node: {fileID: 114224976253284616}
+      _typeQualifiedName: SandboxAI.HTN.OptionScorerBase, SandboxAI, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: optionScorers
+        node: {fileID: 114241655694559000}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  optionScorer: {fileID: 0}
+--- !u!114 &114241655694559000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e689cf7c30d27488e8fa87672d1faa, type: 3}
+  m_Name: Target Food
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1160, y: -264}
+  ports:
+    keys:
+    - optionScorers
+    - task
+    values:
+    - _fieldName: optionScorers
+      _node: {fileID: 114241655694559000}
+      _typeQualifiedName: SandboxAI.HTN.OptionScorerBase[], SandboxAI, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: optionScorer
+        node: {fileID: 114224976253284616}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: task
+      _node: {fileID: 114241655694559000}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: tasks
+        node: {fileID: 114785192205936990}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  task: {fileID: 114241655694559000}
+  optionScorers:
+  - {fileID: 114224976253284616}
+--- !u!114 &114250557546955276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 848356742b1761e42a18353db0d98661, type: 3}
+  m_Name: Closest Game Object
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1544, y: 440}
+  ports:
+    keys:
+    - optionScorer
+    values:
+    - _fieldName: optionScorer
+      _node: {fileID: 114250557546955276}
+      _typeQualifiedName: SandboxAI.HTN.OptionScorerBase, SandboxAI, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: optionScorers
+        node: {fileID: 114905176581802980}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  optionScorer: {fileID: 0}
+--- !u!114 &114480900038190310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d5fe93f98051f49bc7b8eb79864e82, type: 3}
+  m_Name: Main Node
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -104, y: -40}
+  ports:
+    keys:
+    - main
+    values:
+    - _fieldName: main
+      _node: {fileID: 114480900038190310}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: task
+        node: {fileID: 114747727186625078}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+  main: {fileID: 0}
+--- !u!114 &114532254774610054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46f8c878f1ce29d429cac2e3abff9589, type: 3}
+  m_Name: Has Item In Backpack
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1096, y: 104}
+  ports:
+    keys:
+    - check
+    values:
+    - _fieldName: check
+      _node: {fileID: 114532254774610054}
+      _typeQualifiedName: SandboxAI.HTN.CheckBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: checks
+        node: {fileID: 114785192205936990}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  check: {fileID: 114532254774610054}
+  invert: 1
+--- !u!114 &114707511626103866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30c4d945d1f4494ab719cdaa0331c8f, type: 3}
+  m_Name: Constant Contextual Scorer
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1160, y: 616}
+  ports:
+    keys:
+    - ctxScorer
+    values:
+    - _fieldName: ctxScorer
+      _node: {fileID: 114707511626103866}
+      _typeQualifiedName: SandboxAI.HTN.ContextualScorerBase, SandboxAI, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: ctxScorers
+        node: {fileID: 114073623971154874}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  ctxScorer: {fileID: 0}
+  constantScore: 0.4
+--- !u!114 &114747727186625078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fc6094bce6a9514f819b875442d08a4, type: 3}
+  m_Name: Compound Task
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -456, y: -40}
+  ports:
+    keys:
+    - methods
+    - task
+    values:
+    - _fieldName: methods
+      _node: {fileID: 114747727186625078}
+      _typeQualifiedName: SandboxAI.HTN.Method[], SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: method
+        node: {fileID: 114073623971154874}
+        reroutePoints: []
+      - fieldName: method
+        node: {fileID: 114785192205936990}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: task
+      _node: {fileID: 114747727186625078}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: main
+        node: {fileID: 114480900038190310}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  task: {fileID: 114747727186625078}
+  methods:
+  - {fileID: 114073623971154874}
+--- !u!114 &114785192205936990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5467f058b4c44f84ea3d53115de86, type: 3}
+  m_Name: Pickup Food
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -776, y: -184}
+  ports:
+    keys:
+    - method
+    - tasks
+    - ctxScorers
+    - checks
+    values:
+    - _fieldName: method
+      _node: {fileID: 114785192205936990}
+      _typeQualifiedName: SandboxAI.HTN.Method, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: methods
+        node: {fileID: 114747727186625078}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: tasks
+      _node: {fileID: 114785192205936990}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase[], SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: task
+        node: {fileID: 114241655694559000}
+        reroutePoints: []
+      - fieldName: task
+        node: {fileID: 114962910425760748}
+        reroutePoints: []
+      - fieldName: task
+        node: {fileID: 114829231536106088}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: ctxScorers
+      _node: {fileID: 114785192205936990}
+      _typeQualifiedName: SandboxAI.HTN.ContextualScorerBase[], SandboxAI, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: ctxScorer
+        node: {fileID: 114813624013133474}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: checks
+      _node: {fileID: 114785192205936990}
+      _typeQualifiedName: SandboxAI.HTN.CheckBase[], SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: check
+        node: {fileID: 114532254774610054}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+  method: {fileID: 114785192205936990}
+  tasks:
+  - {fileID: 114241655694559000}
+  - {fileID: 114962910425760748}
+  - {fileID: 114829231536106088}
+  ctxScorers:
+  - {fileID: 114813624013133474}
+  checks:
+  - {fileID: 114532254774610054}
+--- !u!114 &114813624013133474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30c4d945d1f4494ab719cdaa0331c8f, type: 3}
+  m_Name: Constant Contextual Scorer
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1160, y: 8}
+  ports:
+    keys:
+    - ctxScorer
+    values:
+    - _fieldName: ctxScorer
+      _node: {fileID: 114813624013133474}
+      _typeQualifiedName: SandboxAI.HTN.ContextualScorerBase, SandboxAI, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: ctxScorers
+        node: {fileID: 114785192205936990}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  ctxScorer: {fileID: 0}
+  constantScore: 0.6
+--- !u!114 &114829231536106088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99dc2e3c831685a46ad92262f8bfaebd, type: 3}
+  m_Name: Add Target To Backpack
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1160, y: -72}
+  ports:
+    keys:
+    - task
+    values:
+    - _fieldName: task
+      _node: {fileID: 114829231536106088}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: tasks
+        node: {fileID: 114785192205936990}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  task: {fileID: 114829231536106088}
+--- !u!114 &114905176581802980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1b662ef38645f4ebb512402672c180, type: 3}
+  m_Name: Target Robot
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1160, y: 424}
+  ports:
+    keys:
+    - optionScorers
+    - task
+    values:
+    - _fieldName: optionScorers
+      _node: {fileID: 114905176581802980}
+      _typeQualifiedName: SandboxAI.HTN.OptionScorerBase[], SandboxAI, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections:
+      - fieldName: optionScorer
+        node: {fileID: 114250557546955276}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _dynamic: 0
+    - _fieldName: task
+      _node: {fileID: 114905176581802980}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: tasks
+        node: {fileID: 114073623971154874}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  task: {fileID: 114905176581802980}
+  optionScorers:
+  - {fileID: 114250557546955276}
+--- !u!114 &114962910425760748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5f7bfadf09be3448ac00b5cd5ee7b1, type: 3}
+  m_Name: Move To Target
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1160, y: -168}
+  ports:
+    keys:
+    - task
+    values:
+    - _fieldName: task
+      _node: {fileID: 114962910425760748}
+      _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: tasks
+        node: {fileID: 114785192205936990}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _dynamic: 0
+  task: {fileID: 114962910425760748}
+  targetDistance: 0.1
