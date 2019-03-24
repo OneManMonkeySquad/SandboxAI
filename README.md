@@ -13,7 +13,6 @@ Features:
 
 Missing:
 - Debugger
-- Example project
 - Interruptions like getting attacked
 - Partial plans: stop planning when the estimated execution time of the plan reaches some threshold
 - No performance optimizations yet; The algorithm itself can be very fast and efficient
