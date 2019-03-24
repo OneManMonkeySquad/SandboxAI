@@ -1,19 +1,22 @@
 # SandboxAI
-HTN AI implementation for [Unity3d](https://unity3d.com). It's perfect for a Skyrim-like sandbox AI. It doesn't follow any existing implementation. Instead it's
+Minimal HTN AI implementation for [Unity3d](https://unity3d.com). It's perfect for a Skyrim-like sandbox AI. It doesn't follow any existing implementation. Instead it's
 my own interpretation of the concept. 
 
 ![Example Graph](Docs/ExampleGraph.jpg)
 ![Example Scorer](Docs/ExampleScorer.jpg)
+![Example Scorer](Docs/ServingSuggestion.png)
 
 Features:
 - HTN/utility AI hybrid: priorize tasks and select inputs by utility functions
 - One included dependency: [xNode](https://github.com/Siccity/xNode)
+- Minimal api surface to learn while still having the possibily of creating a powerful game AI
 
 Missing:
 - Debugger
 - Example project
 - Interruptions like getting attacked
 - Partial plans: stop planning when the estimated execution time of the plan reaches some threshold
+- No performance optimizations yet; The algorithm itself can be very fast and efficient
 
 ## Getting started
 Use git to checkout the project or [unzip a release](https://github.com/SirPolly/SandboxAI/releases) into your Unit project Assets folder. Open the *Example/Example.scene*.
