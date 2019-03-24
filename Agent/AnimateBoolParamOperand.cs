@@ -14,13 +14,13 @@ namespace SandboxAI {
             _duration = duration;
         }
 
-        public void Start(Agent agent) {
+        public void Start(HTNAgent agent) {
             agent.navigation.Disable();
             agent.animator.SetBool(_boolParam, true);
             _endTime = Time.time + _duration;
         }
 
-        public AgentOperandUpdateResult Update(Agent agent) {
+        public AgentOperandUpdateResult Update(HTNAgent agent) {
             if (Time.time >= _endTime) {
                 agent.animator.SetBool(_boolParam, false);
                 return AgentOperandUpdateResult.Success;

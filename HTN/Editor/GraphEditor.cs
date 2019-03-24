@@ -6,10 +6,10 @@ using XNode;
 using UnityEditor;
 
 namespace SandboxAI.HTN {
-    [CustomNodeGraphEditor(typeof(Graph))]
+    [CustomNodeGraphEditor(typeof(HTNGraph))]
     public class HTNGraphEditor : NodeGraphEditor {
         public override void OnGUI() {
-            var graph = target as Graph;
+            var graph = target as HTNGraph;
             if (!graph.nodes.Any(n => n is MainNode)) {
                 CreateNode(typeof(MainNode), new Vector2(-104, -40));
             }

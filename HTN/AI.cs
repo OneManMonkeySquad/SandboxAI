@@ -20,8 +20,13 @@ namespace SandboxAI.HTN {
                 if (Time.time >= _minNextPlanTime) {
                     _minNextPlanTime = Time.time + 0.25f;
 
+                    var watch = System.Diagnostics.Stopwatch.StartNew();
+                    // the code that you want to measure comes here
+                    
                     if (Planner.Plan(state, rootTask, out _currentPlan)) {
-                        Debug.Log("Plan: " + _currentPlan.Aggregate("", (acc, task) => acc + task.name + ","));
+                        watch.Stop();
+
+                        Debug.Log("Plan (took " + watch.ElapsedMilliseconds + "ms): " /*+ _currentPlan.Aggregate("", (acc, task) => acc + task.name + ",")*/);
 
                         CompleteCurrentTask(state);
                     }

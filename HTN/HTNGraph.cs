@@ -4,8 +4,8 @@ using UnityEngine;
 using XNode;
 
 namespace SandboxAI.HTN {
-    [CreateAssetMenu]
-    public class Graph : NodeGraph {
+    [CreateAssetMenu(menuName = "SandboxAI/HTNGraph")]
+    public class HTNGraph : NodeGraph {
         [NonSerialized]
         TaskBase _mainTask;
         public TaskBase mainTask {

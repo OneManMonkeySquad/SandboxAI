@@ -9,8 +9,8 @@ namespace SandboxAI {
     }
 
     public interface IAgentOperand {
-        void Start(Agent agent);
-        AgentOperandUpdateResult Update(Agent agent);
+        void Start(HTNAgent agent);
+        AgentOperandUpdateResult Update(HTNAgent agent);
     }
     
     public class LambdaOperand : IAgentOperand {
@@ -20,10 +20,10 @@ namespace SandboxAI {
             _lambda = lambda;
         }
 
-        public void Start(Agent agent) {
+        public void Start(HTNAgent agent) {
         }
 
-        public AgentOperandUpdateResult Update(Agent agent) {
+        public AgentOperandUpdateResult Update(HTNAgent agent) {
             return _lambda();
         }
     }
@@ -37,11 +37,11 @@ namespace SandboxAI {
             _rotation = rotation;
         }
 
-        public void Start(Agent agent) {
+        public void Start(HTNAgent agent) {
             agent.navigation.Disable();
         }
 
-        public AgentOperandUpdateResult Update(Agent agent) {
+        public AgentOperandUpdateResult Update(HTNAgent agent) {
             var a = Time.deltaTime * 4;
             agent.transform.position = Vector3.Lerp(agent.transform.position, _position, a);
             agent.transform.rotation = Quaternion.Lerp(agent.transform.rotation, _rotation, a);

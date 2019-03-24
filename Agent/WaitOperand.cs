@@ -12,11 +12,11 @@ namespace SandboxAI {
             _duration = duration;
         }
 
-        public void Start(Agent agent) {
+        public void Start(HTNAgent agent) {
             _endTime = Time.time + _duration;
         }
 
-        public AgentOperandUpdateResult Update(Agent agent) {
+        public AgentOperandUpdateResult Update(HTNAgent agent) {
             if (Time.time >= _endTime)
                 return AgentOperandUpdateResult.Success;
 

@@ -8,12 +8,12 @@
             _targetDistance = targetDistance;
         }
 
-        public void Start(Agent agent) {
+        public void Start(HTNAgent agent) {
             agent.navigation.MoveTo(_target, _targetDistance);
             agent.animator.SetBool("Moving", true);
         }
 
-        public AgentOperandUpdateResult Update(Agent agent) {
+        public AgentOperandUpdateResult Update(HTNAgent agent) {
             if (agent.navigation.failed || _target == null) {
                 agent.navigation.StopMoving();
                 agent.animator.SetBool("Moving", false);

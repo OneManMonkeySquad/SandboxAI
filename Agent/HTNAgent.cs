@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace SandboxAI {
-    [AddComponentMenu("AI/Sandbox/Agent")]
-    public class Agent : MonoBehaviour {
+    [AddComponentMenu("AI/Sandbox/HTNAgent")]
+    public class HTNAgent : MonoBehaviour {
         public IAgentNavigation navigation {
             get { return GetComponent<IAgentNavigation>(); }
         }
@@ -13,20 +13,16 @@ namespace SandboxAI {
             get { return GetComponentInChildren<Animator>(); }
         }
 
-        public Graph graph;
+        public HTNGraph graph;
 
-        AI ai;
+        AI ai = new AI();
         Queue<IAgentOperand> ops = new Queue<IAgentOperand>();
         IAgentOperand _currentOp;
 
         public void QueueOperand(IAgentOperand operand) {
             ops.Enqueue(operand);
         }
-
-        public void StartAgent() {
-            ai = new AI();
-        }
-
+        
         public void UpdateAgent(IState state) {
             ai.Update(state, graph.mainTask);
             

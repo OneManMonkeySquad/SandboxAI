@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace SandboxAI.HTN {
@@ -14,6 +13,7 @@ namespace SandboxAI.HTN {
         }
 
         public static bool Plan(IState currentState, TaskBase rootTask, out Stack<TaskBase> finalPlan) {
+            // The setup
             Assert.IsNotNull(currentState);
             Assert.IsNotNull(rootTask);
 
@@ -25,20 +25,21 @@ namespace SandboxAI.HTN {
             plannerState.tasksToProcess.Push(rootTask);
             plannerState.nextMethodIdx = 0;
 
+            // The heist
             var decompHistory = new Stack<State>();
             while (plannerState.tasksToProcess.Count > 0) {
                 var currentTask = plannerState.tasksToProcess.Pop();
-                if (currentTask is CompoundTask CurrentTaskCompound) {
-                    Debug.Log(Padd(decompHistory) + "CT " + currentTask.name);
+                if (currentTask is CompoundTask currentTaskCompound) {
+                    //Debug.Log(Padd(decompHistory) + "CT " + currentTask.name);
 
-                    if (plannerState.nextMethodPtr != CurrentTaskCompound) {
-                        plannerState.nextMethodPtr = CurrentTaskCompound;
+                    if (plannerState.nextMethodPtr != currentTaskCompound) {
+                        plannerState.nextMethodPtr = currentTaskCompound;
                         plannerState.nextMethodIdx = 0;
                     }
 
-                    var satisfiedMethod = FindSatisfiedMethod(CurrentTaskCompound, plannerState.workingWS, ref plannerState.nextMethodIdx);
+                    var satisfiedMethod = FindSatisfiedMethod(currentTaskCompound, plannerState.workingWS, ref plannerState.nextMethodIdx);
                     if (satisfiedMethod != null) {
-                        RecordDecompositionOfTask(plannerState, CurrentTaskCompound, decompHistory);
+                        RecordDecompositionOfTask(plannerState, currentTaskCompound, decompHistory);
 
                         for (int i = satisfiedMethod.tasks.Length - 1; i >= 0; --i) {
                             var t = satisfiedMethod.tasks[i];
@@ -46,11 +47,11 @@ namespace SandboxAI.HTN {
                         }
                     }
                     else {
-                        RestoreToLastDecomposedTask(ref plannerState, decompHistory, CurrentTaskCompound.name + " no satisfied method");
+                        RestoreToLastDecomposedTask(ref plannerState, decompHistory, currentTaskCompound.name + " no satisfied method");
                     }
                 }
                 else { //Primitive Task
-                    Debug.Log(Padd(decompHistory) + "PT " + currentTask.name);
+                    //Debug.Log(Padd(decompHistory) + "PT " + currentTask.name);
 
                     if (currentTask.Check(plannerState.workingWS)) {
                         currentTask.Apply(plannerState.workingWS);
@@ -62,6 +63,7 @@ namespace SandboxAI.HTN {
                 }
             }
 
+            // Final countdown
             if (plannerState.finalPlan.Count == 0) {
                 finalPlan = null;
                 return false;
@@ -86,7 +88,7 @@ namespace SandboxAI.HTN {
                 var methodValid = true;
                 foreach (var task in method.tasks) {
                     if (!task.Check(methodState)) {
-                        Debug.Log(CurrentTaskCompound + " not satisfied because " + task + " check failed");
+                        //Debug.Log(CurrentTaskCompound + " not satisfied because " + task + " check failed");
 
                         methodValid = false;
                         break;
