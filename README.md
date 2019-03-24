@@ -21,7 +21,7 @@ Missing:
 ## Getting started
 Use git to checkout the project or [unzip a release](https://github.com/SirPolly/SandboxAI/releases) into your Unit project Assets folder. Open the *Example/Example.scene*.
 
-# Setup your GameObject
+### Setup your GameObject
 Derive from *SandboxAI.HTNAgent*. Create your state class deriving from *SandboxAI.IState*. 
 Add an *IAgentNavigation* derived component (NavMeshAgentNavigation, SimplePositionAgentNavigation).
 
