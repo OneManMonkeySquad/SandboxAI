@@ -1,4 +1,6 @@
 # SandboxAI
+**Not even close to production ready. All feedback and patches are welcome.**
+
 Minimal HTN AI implementation for [Unity3d](https://unity3d.com). It's perfect for a Skyrim-like sandbox AI. It doesn't follow any existing implementation. Instead it's
 my own interpretation of the concept. 
 
