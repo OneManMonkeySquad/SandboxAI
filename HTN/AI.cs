@@ -26,7 +26,7 @@ namespace SandboxAI.HTN {
                     if (Planner.Plan(state, rootTask, out _currentPlan)) {
                         watch.Stop();
 
-                        Debug.Log("Plan (took " + watch.ElapsedMilliseconds + "ms): " /*+ _currentPlan.Aggregate("", (acc, task) => acc + task.name + ",")*/);
+                        Debug.Log("Plan (took " + watch.ElapsedMilliseconds + "ms): " + _currentPlan.Aggregate("", (acc, task) => acc + task.name + ","));
 
                         CompleteCurrentTask(state);
                     }
