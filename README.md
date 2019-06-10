@@ -6,6 +6,7 @@ my own interpretation of the concept.
 
 ![Example Graph](Docs/ExampleGraph.jpg)
 ![Example Scorer](Docs/ExampleScorer.jpg)
+![Example Graph 2](Docs/ExampleGraph2.jpg)
 ![Example Scorer](Docs/ServingSuggestion.png)
 
 Features:
@@ -18,6 +19,7 @@ Missing:
 - Interruptions like getting attacked
 - Partial plans: stop planning when the estimated execution time of the plan reaches some threshold
 - No performance optimizations yet; The algorithm itself can be very fast and efficient
+
 
 ## Getting started
 Use git to checkout the project or [unzip a release](https://github.com/SirPolly/SandboxAI/releases) into your Unit project Assets folder. Open the *Example/Example.scene*.
@@ -53,15 +55,15 @@ Look at the sample to learn how to create ContextualScorers, OptionScorers and T
 
 Now, create your own logic classes and create your own HTNGraph by right-clicking in the project explorer, then clicking Create/SandboxAI/HTNGraph.
 
+
 ## The planner
 ![Planner](Docs/Planner.png)
 
-Every time the current plan is completed or invalidated the planner is asked to create a new plan. The Main Nodes main input tells it where to start planning. It recursivly searches through Compound Task methods for a valid method. The final aim of the planner is to reduce the whole graph to a list of tasks.
+Every time the current plan is completed or invalidated the planner is asked to create a new plan. The **Main Node**s main input tells it where to start planning. It recursivly searches through Compound Tasks methods for a valid method. The final aim of the planner is to reduce the whole graph to a list of tasks. If you ignore Compound Tasks the final result of the planner are just the tasks of one valid Method. Compound tasks though allow you to nest more and more Methods, Compound Tasks and Tasks. As usual in such a graph, nodes are allowed to be connected to multiple other nodes which allows you to reuse parts of the graph. 
 
 **Methods** may have checks (yellow in the HTNGraph) for the AIs state (IState). The order in which they are checked depends on the contexual scorers (in blue). If one is found, it's tasks are validated with state checks too. Methods with checks and Compound Tasks allow you to disable a whole subpart of the graph (see 1).
 
-**Tasks** are actual actions the AI is supposed to do. They are grouped by Methods into sequences of actions (see 2). Each Tasks may have preconditions and effects on the AIs state (IState). *Task.Check(IState state)* and *Task.Apply(IState state)* are used during planning and execution to express these. 
-
+**Tasks** are actual actions the AI is supposed to do. They are grouped by Methods into sequences of actions (see 2). Each Task may have preconditions and effects on the AIs state (IState). *Task.Check(IState state)* and *Task.Apply(IState state)* are used during planning and execution to express these. 
 
 
 ## Based upon
