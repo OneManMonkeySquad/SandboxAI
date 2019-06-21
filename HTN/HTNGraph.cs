@@ -17,7 +17,7 @@ namespace SandboxAI.HTN {
                         return null;
                     }
 
-                    _mainTask = mn.GetInputValue<TaskBase>("main");
+                    _mainTask = mn.GetInputValue<TaskBase>("task");
                 }
                 return _mainTask;
             }

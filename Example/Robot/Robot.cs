@@ -1,9 +1,11 @@
 ﻿using SandboxAI;
+using SandboxAI.HTN;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(HTNAgent))]
 public class Robot : MonoBehaviour {
+    public HTNGraph graph;
+
     public Transform backpackSocket;
     public GameObject backpackItem;
     public List<GameObject> foodInProximity = new List<GameObject>();
@@ -25,7 +27,8 @@ public class Robot : MonoBehaviour {
     }
 
     void Start() {
-        var agent = GetComponent<HTNAgent>();
+        var navigation = GetComponent<IAgentNavigation>();
+        var agent = new HTNAgent(navigation, null, graph);
 
         _state = new RobotState(agent, this) {
         };

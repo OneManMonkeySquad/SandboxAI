@@ -1,51 +1,57 @@
 ﻿using SandboxAI.HTN;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace SandboxAI {
-    [AddComponentMenu("AI/Sandbox/HTNAgent")]
-    public class HTNAgent : MonoBehaviour {
-        public IAgentNavigation navigation {
-            get { return GetComponent<IAgentNavigation>(); }
+    public class HTNAgent {
+        public HTNGraph graph {
+            get;
+            internal set;
         }
+        public IAgentNavigation navigation;
+        public IAgentAnimator animator;
 
-        public Animator animator {
-            get { return GetComponentInChildren<Animator>(); }
-        }
-
-        public HTNGraph graph;
-
-        AI ai = new AI();
-        Queue<IAgentOperand> ops = new Queue<IAgentOperand>();
+        AI _ai = new AI();
+        Queue<IAgentOperand> _ops = new Queue<IAgentOperand>();
         IAgentOperand _currentOp;
 
+        public HTNAgent(IAgentNavigation navigation, IAgentAnimator animator, HTNGraph graph) {
+            if (graph == null)
+                throw new ArgumentNullException("graph");
+
+            this.navigation = navigation;
+            this.animator = animator;
+            this.graph = graph;
+        }
+
         public void QueueOperand(IAgentOperand operand) {
-            ops.Enqueue(operand);
+            _ops.Enqueue(operand);
         }
         
         public void UpdateAgent(IState state) {
-            ai.Update(state, graph.mainTask);
+            _ai.Update(state, graph.mainTask);
             
             switch (UpdateOperands()) {
                 case AgentOperandUpdateResult.Pending:
                     break;
 
                 case AgentOperandUpdateResult.Success:
-                    ai.CompleteCurrentTask(state);
+                    _ai.CompleteCurrentTask(state);
                     break;
 
                 case AgentOperandUpdateResult.Failed:
-                    ai.AbortCurrentTask(state);
+                    _ai.AbortCurrentTask(state);
                     break;
             }
         }
 
         AgentOperandUpdateResult UpdateOperands() {
             if (_currentOp == null) {
-                if (ops.Count == 0)
+                if (_ops.Count == 0)
                     return AgentOperandUpdateResult.Success;
 
-                _currentOp = ops.Dequeue();
+                _currentOp = _ops.Dequeue();
                 _currentOp.Start(this);
             }
 
@@ -53,7 +59,7 @@ namespace SandboxAI {
             if (result == AgentOperandUpdateResult.Failed) {
                 Debug.Log("OP failed " + _currentOp);
                 _currentOp = null;
-                ops.Clear();
+                _ops.Clear();
                 return AgentOperandUpdateResult.Failed;
             }
 

@@ -42,17 +42,8 @@ namespace SandboxAI {
         }
 
         public AgentOperandUpdateResult Update(HTNAgent agent) {
-            var a = Time.deltaTime * 4;
-            agent.transform.position = Vector3.Lerp(agent.transform.position, _position, a);
-            agent.transform.rotation = Quaternion.Lerp(agent.transform.rotation, _rotation, a);
-
-            if ((agent.transform.position - _position).sqrMagnitude > 0.01f)
-                return AgentOperandUpdateResult.Pending;
-
-            if (Quaternion.Angle(agent.transform.rotation, _rotation) > 5)
-                return AgentOperandUpdateResult.Pending;
-
-            return AgentOperandUpdateResult.Success;
+            agent.navigation.LerpTo(_position, _rotation);
+            return agent.navigation.hasArrived ? AgentOperandUpdateResult.Success : AgentOperandUpdateResult.Pending;
         }
     }
 }

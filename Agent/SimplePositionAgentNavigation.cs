@@ -29,6 +29,10 @@ namespace SandboxAI {
             _hasArrived = false;
         }
 
+        public void LerpTo(Vector3 position, Quaternion rotation, float time = 1) {
+            MoveTo(new MoveToTransformOrPosition(position));
+        }
+
         public void StopMoving() {
             _target = null;
             _velocity = Vector3.zero;

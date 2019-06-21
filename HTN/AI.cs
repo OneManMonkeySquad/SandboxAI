@@ -1,21 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace SandboxAI.HTN {
-    public enum CompleteCurrentTaskResult {
-        ContinuePlan,
-        NoPlan,
-        PlanSuccess,
-        PlanFailed
-    }
-
     public class AI {
+        public enum CompleteCurrentTaskResult {
+            ContinuePlan,
+            NoPlan,
+            PlanSuccess,
+            PlanFailed
+        }
+
         Stack<TaskBase> _currentPlan;
         TaskBase _currentTask;
         float _minNextPlanTime;
 
         public void Update(IState state, TaskBase rootTask) {
+            Assert.IsNotNull(rootTask);
+
             if (_currentPlan == null) {
                 if (Time.time >= _minNextPlanTime) {
                     _minNextPlanTime = Time.time + 0.25f;
@@ -67,7 +70,6 @@ namespace SandboxAI.HTN {
             if (!_currentTask.Check(state)) {
                 _currentPlan = null;
                 _currentTask = null;
-                Debug.LogError("Task check failed");
                 return CompleteCurrentTaskResult.PlanFailed;
             }
 

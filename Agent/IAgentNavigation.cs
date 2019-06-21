@@ -15,6 +15,7 @@ namespace SandboxAI {
         }
 
         void MoveTo(MoveToTransformOrPosition target, float distance = 0);
+        void LerpTo(Vector3 position, Quaternion rotation, float time = 1);
         void StopMoving();
         void Disable();
     }

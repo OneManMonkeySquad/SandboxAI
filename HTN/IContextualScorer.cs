@@ -1,7 +1,7 @@
 ﻿using XNode;
 
 namespace SandboxAI.HTN {
-    [NodeTint(230, 230, 255)]
+    [NodeTint(200, 200, 255)]
     [NodeWidth(270)]
     public abstract class ContextualScorerBase : Node {
         [Output] public ContextualScorerBase ctxScorer;

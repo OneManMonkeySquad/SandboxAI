@@ -248,12 +248,12 @@ MonoBehaviour:
   m_Name: Main Node
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -104, y: -40}
+  position: {x: -104, y: -24}
   ports:
     keys:
-    - main
+    - task
     values:
-    - _fieldName: main
+    - _fieldName: task
       _node: {fileID: 114480900038190310}
       _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
@@ -264,7 +264,7 @@ MonoBehaviour:
       _direction: 0
       _connectionType: 0
       _dynamic: 0
-  main: {fileID: 0}
+  task: {fileID: 0}
 --- !u!114 &114532254774610054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
       _typeQualifiedName: SandboxAI.HTN.TaskBase, SandboxAI, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: main
+      - fieldName: task
         node: {fileID: 114480900038190310}
         reroutePoints: []
       _direction: 1
@@ -373,6 +373,7 @@ MonoBehaviour:
       _dynamic: 0
   task: {fileID: 114747727186625078}
   methods:
+  - {fileID: 114785192205936990}
   - {fileID: 114073623971154874}
 --- !u!114 &114785192205936990
 MonoBehaviour:

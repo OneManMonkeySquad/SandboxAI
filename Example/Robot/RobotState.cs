@@ -21,6 +21,7 @@ public class RobotState : IState {
     }
 
     public GameObject target;
+    public float nextShotTime;
 
     public IState Clone() {
         return new RobotState(agent, robot) { };

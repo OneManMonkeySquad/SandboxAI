@@ -3,7 +3,8 @@ using XNode;
 
 namespace SandboxAI.HTN {
     [CreateNodeMenu("Method")]
-    public class Method : Node {
+    [NodeTint(255, 160, 160)]
+    public sealed class Method : Node {
         [Output] public Method method;
         [Input(ShowBackingValue.Never)] public TaskBase[] tasks;
         [Input(ShowBackingValue.Never)] public ContextualScorerBase[] ctxScorers;

@@ -16,10 +16,10 @@ namespace SandboxAI.HTN {
         public override void OnBodyGUI() {
             var task = (TaskBase)target;
             var desc = task.description;
-            if(desc.Length > 0) {
+            if (desc.Length > 0) {
                 EditorGUILayout.LabelField(task.description, labelStyle);
             }
-           
+
             base.OnBodyGUI();
         }
     }

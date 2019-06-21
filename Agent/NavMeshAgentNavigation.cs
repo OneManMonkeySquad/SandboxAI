@@ -10,7 +10,7 @@ namespace SandboxAI {
         }
 
         public bool hasArrived {
-            get { return !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance; }
+            get { return !_agent.pathPending && _agent.isOnNavMesh && _agent.remainingDistance <= _agent.stoppingDistance; }
         }
 
         public bool failed {
@@ -18,7 +18,7 @@ namespace SandboxAI {
         }
 
         NavMeshAgent _agent;
-        MoveToTransformOrPosition _target;
+        MoveToTransformOrPosition _moveTarget;
 
         public void MoveTo(MoveToTransformOrPosition target, float distance = 0) {
             _agent.enabled = true;
@@ -30,7 +30,13 @@ namespace SandboxAI {
             _agent.destination = target.GetPosition();
             _agent.isStopped = false;
 
-            _target = target;
+            _moveTarget = target;
+        }
+
+        public void LerpTo(Vector3 position, Quaternion rotation, float time = 1) {
+            transform.position = position;
+            transform.rotation = rotation;
+            _agent.enabled = false;
         }
 
         public void StopMoving() {
@@ -44,17 +50,17 @@ namespace SandboxAI {
             _agent.enabled = false;
         }
 
-        void Start() {
+        void Awake() {
             _agent = GetComponent<NavMeshAgent>();
         }
 
         void Update() {
-            if (!_agent.enabled || _target == null)
+            if (!_agent.enabled || _moveTarget == null)
                 return;
 
-            var diff = _agent.destination - _target.GetPosition();
+            var diff = _agent.destination - _moveTarget.GetPosition();
             if (diff.sqrMagnitude > 1) {
-                _agent.destination = _target.GetPosition();
+                _agent.destination = _moveTarget.GetPosition();
             }
         }
     }

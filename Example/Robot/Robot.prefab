@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 4742280372283195363}
   - component: {fileID: 4574909655793350712}
   - component: {fileID: 6031481551094382010}
-  - component: {fileID: 3941781075414969872}
-  - component: {fileID: 4688880855523864067}
   - component: {fileID: 2160818103095063869}
+  - component: {fileID: 4688880855523864067}
   - component: {fileID: 3242957880943280882}
   - component: {fileID: 838700238385204936}
   m_Layer: 0
@@ -97,36 +96,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3941781075414969872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427537477916034962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 422d90b9f4844234aa1704631516b9a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000, guid: ec1fd29c30952ad4782d74ea96f78f5a, type: 2}
---- !u!114 &4688880855523864067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8427537477916034962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ff3c6a314a87b40b9bb1bacce396e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  backpackSocket: {fileID: 8324629083761472232}
-  backpackItem: {fileID: 0}
-  foodInProximity: []
-  robotsInProximity: []
-  shotsInProximity: []
 --- !u!114 &2160818103095063869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +108,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998c1ff3a6739344d96cbf15fde63050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4688880855523864067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8427537477916034962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ff3c6a314a87b40b9bb1bacce396e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000, guid: ec1fd29c30952ad4782d74ea96f78f5a, type: 2}
+  backpackSocket: {fileID: 8324629083761472232}
+  backpackItem: {fileID: 0}
+  foodInProximity: []
+  robotsInProximity: []
+  shotsInProximity: []
 --- !u!95 &3242957880943280882
 Animator:
   serializedVersion: 3
