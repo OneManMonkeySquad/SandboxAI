@@ -10,19 +10,16 @@
 
         public void Start(HTNAgent agent) {
             agent.navigation.MoveTo(_target, _targetDistance);
-            agent.animator?.SetBool("Moving", true);
         }
 
         public AgentOperandUpdateResult Update(HTNAgent agent) {
             if (agent.navigation.failed || _target == null) {
                 agent.navigation.StopMoving();
-                agent.animator?.SetBool("Moving", false);
                 return AgentOperandUpdateResult.Failed;
             }
 
             if (agent.navigation.hasArrived) {
                 agent.navigation.StopMoving();
-                agent.animator?.SetBool("Moving", false);
                 return AgentOperandUpdateResult.Success;
             }
 

@@ -28,7 +28,7 @@ public class Robot : MonoBehaviour {
 
     void Start() {
         var navigation = GetComponent<IAgentNavigation>();
-        var agent = new HTNAgent(navigation, null, graph);
+        var agent = new HTNAgent(navigation, graph);
 
         _state = new RobotState(agent, this) {
         };

@@ -12,7 +12,7 @@ public class MoveToTransformOrPosition {
         _position = position;
     }
 
-    public Vector3 GetPosition() {
+    public Vector3 GetWorldPosition() {
         return _transform != null ? _transform.position : _position;
     }
 }

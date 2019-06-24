@@ -10,18 +10,16 @@ namespace SandboxAI {
             internal set;
         }
         public IAgentNavigation navigation;
-        public IAgentAnimator animator;
 
         AI _ai = new AI();
         Queue<IAgentOperand> _ops = new Queue<IAgentOperand>();
         IAgentOperand _currentOp;
 
-        public HTNAgent(IAgentNavigation navigation, IAgentAnimator animator, HTNGraph graph) {
+        public HTNAgent(IAgentNavigation navigation, HTNGraph graph) {
             if (graph == null)
                 throw new ArgumentNullException("graph");
 
             this.navigation = navigation;
-            this.animator = animator;
             this.graph = graph;
         }
 

@@ -4,6 +4,11 @@ namespace SandboxAI {
     public interface IAgentNavigation {
         Vector3 velocity {
             get;
+            set;
+        }
+
+        Vector3 desiredVelocity {
+            get;
         }
 
         bool hasArrived {

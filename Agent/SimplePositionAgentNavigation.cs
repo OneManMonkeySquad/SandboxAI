@@ -6,6 +6,11 @@ namespace SandboxAI {
     public class SimplePositionAgentNavigation : MonoBehaviour, IAgentNavigation {
         public Vector3 velocity {
             get { return _velocity; }
+            set { _velocity = value; }
+        }
+
+        public Vector3 desiredVelocity {
+            get { return _velocity; }
         }
 
         public bool hasArrived {
@@ -49,7 +54,7 @@ namespace SandboxAI {
             if (_target == null || _hasArrived)
                 return;
 
-            var diff = _target.GetPosition() - transform.position;
+            var diff = _target.GetWorldPosition() - transform.position;
 
             var mag = diff.magnitude;
             if (mag > 0.01f) {
